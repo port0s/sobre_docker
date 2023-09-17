@@ -1,0 +1,25 @@
+# VÁ AO DOCKEHUB E CRIE UMA CONTA
+
+
+# CRIE UM NOVO REPOSITÓRIO
+
+
+# REALIZE LOGIN DO DOCKER NA SUA MÁQUINA
+docker login
+
+
+# PARA CRIAR UMA TAG
+docker tag << COLOQUE O NOME DA TAG >>  << COLOQUE AQUI O NOME DA IMAGEM >>
+	ex1: docker tag aprendizado-docker aprendizado-docker
+	ex2: docker tag aprendizado-docker aprendizado-docker:v1
+
+	OBS: o nome do usuário é opcional
+	docker push << COLOQUE AQUI O NOME DO USUÁRIO NO DOCKER >>/<< COLOQUE AQUI O NOME DA IMAGEM >>
+	ex3: docker tag aprendizado-docker rui101/aprendizado-docker
+	ex4: docker tag aprendizado-docker rui101/aprendizado-docker:v1
+
+
+# PARA ENVIAR A IMAGEM
+docker push << COLOQUE AQUI O NOME DO USUÁRIO NO DOCKER >>/<< COLOQUE AQUI O NOME DA IMAGEM >>
+	ex1: docker push rui101/aprendizado-docker
+	ex2: docker push rui101/aprendizado-docker:v1

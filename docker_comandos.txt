@@ -1,0 +1,577 @@
+﻿# ---------- REFERÊNCIAS ---------- #
+#   TERMINAL ROOT: Tutorial Definitivo de DOCKER para INICIANTES (Ubuntu)
+#        -> https://www.youtube.com/watch?v=bsGkIKP1OZ4
+# ----------     //      ---------- #
+
+
+
+
+# INSTALAÇÃO (por snap)
+  sudo snap install docker
+            OU
+  curl -fsSL https://get.docker.com | bash
+
+
+
+
+# VERIFICAÇÃO DA EXISTÊNCIA DO GRUPO DOCKER
+  cat /etc/group | grep docker
+            OU
+  grep 'docker' /etc/group
+  
+
+  # CASO NÃO EXISTA O GRUPO DOCKER (não tenha retornado nada), CRIE
+        sudo groupadd docker
+
+
+
+
+# ADICIONE UM USUÁRIO AO GRUPO DOCKER
+  sudo usermod -aG docker << COLOQUE AQUI O NOME DO USUÁRIO A SER ADICIONADO AO GRUPO DOCKER >>
+         ex1: sudo usermod -aG docker $USER
+          ex2: sudo usermod -aG docker rui 
+
+
+
+
+# REINICIE A MÁQUINA
+  shutdown -r now
+
+
+    # CASO O DOCKER NÃO TENHA INICIALIZADO COM O SISTEMA
+    sudo service docker start
+  
+  
+# INFO - INFORMAÇÕES DO DOCKER
+  docker info
+
+
+
+
+# COMANDO DOCKER POSSUI CONTEXTOS PARA EXECUÇÃO
+  docker container
+  docker image
+  docker network
+  docker context
+  docker volume
+  docker commit
+  docker swarm
+      docker nodes
+      docker service
+  docker secret
+
+
+
+
+# IMAGES - INFORMAÇÕES DAS IMAGENS QUE CONTÊM NA MÁQUINA
+  docker images
+      ou
+  docker image ls
+
+
+
+
+# PS - LISTAR TODOS PROCESSOS
+  docker ps -a
+      ou
+  docker container ls
+
+
+
+
+# SEARCH - PESQUISAR IMAGEM NO DOCKERHUB
+ docker search [OPTIONS] << COLOQUE AQUI O NOME QUE VOCÊ QUISER PESQUISAR >>
+        ex: docker search ubuntu
+
+
+
+
+# PULL - BAIXAR IMAGEM DO DOCKERHUB
+ docker pull [OPTIONS] NAME[:TAG|@DIGEST]
+ docker pull << COLOQUE AQUI O NOME DA IMAGEM QUE VOCÊ QUISER BAIXAR >>
+        ex1: docker pull ubuntu
+        ex2: docker pull gitea/gitea
+
+
+
+
+# RUN - FORMAS DE RODAR UMA IMAGEM DO DOCKER
+
+
+   # RODAR IMAGEM ("teste") DO DOCKER
+     docker run << COLOQUE AQUI O IMAGEM ID OU O NOME DA IMAGEM QUE VOCÊ QUISER RODAR >>
+        ex1: docker run hello-world
+        ex2: docker run ubuntu
+        ex3: docker container run ubuntu
+        ex4: docker run f3e3g99b4g35
+
+
+
+
+   # RODAR IMAGEM NO MODO INTERATIVO (PERMANECER NO SHELL)
+     docker run -it << COLOQUE AQUI O IMAGEM ID OU O NOME DA IMAGEM QUE VOCÊ QUISER RODAR >>
+        ex1: docker run -it ubuntu bash
+        ex2: docker container run -it ubuntu
+
+
+
+
+   # RODAR IMAGEM COMO UM DAEMON (NÂO PERMANECER NO SHELL)
+     docker run -d << COLOQUE AQUI O IMAGEM ID OU O NOME DA IMAGEM QUE VOCÊ QUISER RODAR >>
+        ex1: docker run -d nginx
+        ex2: docker container run -d nginx
+
+
+
+# LOGS - EXIBE OS LOGS REFERENTES A UM CONTAINER
+ docker logs << COLOQUE AQUI O NOME DO CONTAINER QUE VOCÊ QUISER BAIXAR >>
+        ex1: docker logs ubuntu
+        ex2: docker container logs ubuntu
+
+
+
+
+   # SIGA OS LOGS
+   docker logs -f << COLOQUE AQUI O NOME DA IMAGEM QUE VOCÊ QUISER BAIXAR >>
+          ex1: docker logs -f ubuntu
+          ex2: docker container logs -f ubuntu
+
+
+
+
+# STOP - FORMAS DE SAIR DE UM CONTAINER
+
+
+     OBS: o comando docker stop << COLOQUE AQUI O CONTAINER ID DA MÁQUINA >>
+     para o container e o mantém na máquina com o intuito de ser usado posteriormente
+
+
+   # PARAR UM PROCESSO (CONTAINER RODANDO) DOCKER
+     docker stop << COLOQUE AQUI O CONTAINER ID >>
+      ex1: docker stop f3e3g99b4g35
+      ex2: docker container stop f3e3g99b4g35
+
+
+        OU
+        
+   # SAIR DO CONTAINER SEM ENCERRÁ-LO
+     ctrl+p q
+
+
+
+
+# START - INICIAR UM PROCESSO QUE JÁ EXISTE, MAS ESTÁ PARADO
+  docker start << COLOQUE AQUI O CONTAINER ID OU O NOME DO CONTAINER QUE VOCÊ QUER RODAR NOVAMENTE >>
+        ex1: docker start f3e3g99b4g35
+        ex2: docker container start f3e3g99b4g35
+
+
+
+
+# RESTART - INICIAR UM PROCESSO QUE JÁ EXISTE, MAS ESTÁ PARADO
+  docker restart << COLOQUE AQUI O CONTAINER ID OU O NOME DO CONTAINER QUE VOCÊ QUER RODAR NOVAMENTE >>
+        ex1: docker restart f3e3g99b4g35
+        ex2: docker container restart f3e3g99b4g35
+
+
+
+
+# PAUSE - PAUSA O CONTAINER
+  docker pause << COLOQUE AQUI O CONTAINER ID OU O NOME DO CONTAINER QUE VOCÊ QUER RODAR NOVAMENTE >>
+        ex1: docker pause f3e3g99b4g35
+        ex2: docker container pause f3e3g99b4g35
+
+
+
+
+# UNPAUSE - DESPAUSA O CONTAINER
+  docker unpause << COLOQUE AQUI O CONTAINER ID OU O NOME DO CONTAINER QUE VOCÊ QUER RODAR NOVAMENTE >>
+        ex1: docker unpause f3e3g99b4g35
+        ex2: docker container unpause f3e3g99b4g35
+
+
+
+
+# EXEC - FORMAS DE EXECUTAR UM PROCESSO DE UM CONTAINER JÁ INICIADO
+
+
+  # EXECUTAR UM PROCESSO DENTRO DE UM CONTAINER
+    docker exec << COLOQUE AQUI O CONTAINER ID OU O NOME DO CONTAINER QUE VOCÊ QUER RODAR NOVAMENTE >>
+        ex1: docker exec f3e3g99b4g35 ps -a
+        ex2: docker container exec f3e3g99b4g35 ps -a
+
+
+  # EXECUTAR UM PROCESSO EM UM CONTAINER QUE JÁ ESTÁ INICIADO (INIT) PELO MODO INTERATIVO (PERMANECER NO SHELL)
+    docker exec -it << COLOQUE AQUI O CONTAINER ID OU O NOME DO CONTAINER QUE VOCÊ QUER RODAR NOVAMENTE >>
+        ex1: docker exec -it f3e3g99b4g35 /bin/bash
+        ex2: docker container exec -it f3e3g99b4g35 /bin/bash
+
+
+
+
+# RM & RMI - FORMAS DE REMOVER UM CONTAINER
+
+
+  # RM - REMOVER UM PROCESSO (CONTAINER, que precisa estar parado, veja o STOP acima) DOCKER
+    docker rm << COLOQUE AQUI O CONTAINER ID OU O NOME DO CONTAINER QUE VOCÊ QUER REMOVER >>
+        ex1: docker rm f3e3g99b4g35
+        ex2: docker container rm f3e3g99b4g35
+
+
+
+
+  # RM - FORÇAR A REMOÇÃO DE UM PROCESSO (CONTAINER, que precisa estar parado, veja o STOP acima) DOCKER
+    docker rm -f << COLOQUE AQUI O CONTAINER ID OU O NOME DO CONTAINER QUE VOCÊ QUER REMOVER >>
+        ex1: docker rm -f f3e3g99b4g35
+        ex2: docker container rm -f f3e3g99b4g35
+
+
+
+
+  # RMI - REMOVER UMA IMAGEM DA MÁQUINA
+    docker rmi << COLOQUE AQUI O IMAGEM ID OU O NOME DA IMAGEM QUE VOCÊ QUISER RODAR >>
+        ex1: docker rmi t6y45u7f5t33
+        ex2: docker image rmi t6y45u7f5t33
+
+
+
+
+# ATTACH - VOLTAR PARA UM CONTAINER EM FUNCIONAMENTO
+docker attach << COLOQUE AQUI O CONTAINER ID DA MÁQUINA >>
+       ex1: docker attach r11gh6h22k37
+       ex2: docker container attach r11gh6h22k37
+
+
+
+
+
+
+# DIFF - VERIFICAR MODIFICAÇÕES NOS CONTAINERS
+docker diff << COLOQUE AQUI O CONTAINER ID DA MÁQUINA >>
+       ex1: docker diff r11gh6h22k37
+       ex2: docker container diff r11gh6h22k37
+
+
+
+
+
+
+# INSPECT - VERIFICAR O QUE ESTÁ ACONTECENDO NO CONTAINER
+docker inspect << COLOQUE AQUI O CONTAINER ID DA MÁQUINA >>
+        ex1: docker inspect r11gh6h22k37
+        ex2: docker container inspect r11gh6h22k37
+
+
+
+
+
+
+# STATS - VERIFICAR QUANTO O CONTAINER CONSOME DO HOST
+docker stats << COLOQUE AQUI O CONTAINER ID DA MÁQUINA >>
+        ex1: docker stats r11gh6h22k37
+        ex2: docker container stats r11gh6h22k37
+
+
+
+
+# TOP - MOSTRA AS INFORMAÇÕES DOS PROCESSOS RODANDO DENTRO DO CONTAINER
+ docker top << COLOQUE AQUI O CONTAINER ID OU O NOME DO CONTAINER >>
+        ex1: docker top r11gh6h22k37
+        ex2: docker container top r11gh6h22k37
+
+
+
+
+# UPDATE - ATUALIZAÇÃO DE CONTAINER
+ docker update << COLOQUE AQUI O CONTAINER ID OU O NOME DO CONTAINER >>
+        ex1: docker update r11gh6h22k37
+        ex2: docker container update r11gh6h22k37
+
+
+
+
+   # UPDATE - ATUALIZAÇÃO DE CPU
+   docker update --cpus << COLOQUE AQUI O NOME DA IMAGEM QUE VOCÊ QUISER ATUALIZAR >>
+          ex1: docker update --cpus 0.2 ubuntu
+          ex2: docker container update --cpus 0.2 ubuntu
+
+
+
+
+# BUILD - CONSTRUA (BUILDE) UMA IMAGEM
+ docker build << COLOQUE AQUI O NOME DA IMAGEM >>
+        ex1: docker build Dockerfile
+        ex2: docker image build Dockerfile
+
+
+
+
+   # BUILD - COLOQUE UMA TAG NA IMAGEM
+   docker build -t << COLOQUE AQUI O NOME DA TAG >>
+          ex1: docker build -t chongas1:0 Dockerfile
+          ex2: docker container build -t chongas1:0 Dockerfile
+
+
+
+
+   # BUILD - COLOQUE UMA TAG NA IMAGEM E CHAME UM DOCKERFILE ATRAVÉS DE UM PONTO
+   docker build -t << COLOQUE AQUI O NOME DA TAG >>
+          ex1: docker build -t chongas1:0 .
+          ex2: docker container build -t chongas1:0 .
+
+
+
+
+# PRUNE -  FORMAS DE REMOVER NÂO USADOS
+
+   # PRUNE -  FORMAS DE REMOVER UM VOLUME NÂO USADO
+    docker volume prune
+          ex1: docker volume prune
+
+
+
+   # PRUNE -  FORMAS DE REMOVER UM CONTAINER PARADO
+    docker container prune
+           ex1: docker container prune
+
+
+
+
+# COMMIT - CRIE UMA NOVA IMAGEM PARA UM CONTAINER
+ docker commit -m "DESCRIÇÂO" << COLOQUE AQUI O CONTAINER_ID >>
+        ex1: docker commit -m "Debian com curl e nvim" f3e3g99b4g35
+
+
+
+    # COMMIT/TAG - DÊ UM NOME PARA ESTA NOVA IMAGEM
+    docker image tag <CONTAINER_ID> << COLOQUE AQUI O CONTAINER_NAME >>
+           ex1: docker image tag f3e3g99b4g35 debian_curl_nvim:1.0
+
+
+
+
+    # COMMIT/TAG - DÊ UM NOVO NOME PARA ESTA IMAGEM
+    docker image tag <TAG_NAME> << TAG_NEW_NAME >>
+           ex1: docker image tag debian_curl_nvim:1.0 debian_curl_nvim:latest
+
+
+
+
+# LOGIN - REALIZE LOGIN NO DOCKERHUB
+ docker login -u <USER>
+        ex1: docker login -u rui101
+
+
+
+
+# PUSH - ENVIE UMA NOVA IMAGEM PARA O DOCKERHUB
+ docker push <USER>/<< TAG_NEW_NAME >>
+        ex1: docker push rui101/debian_curl_nvim:latest
+
+
+
+# SWARM - ORQUESTRADOR DE CLUSTER
+
+
+    # SWARM INIT - INICIALIZAR UM CLUSTER
+    ## O cluster será inicializado em boguinha_01
+     docker swarm init
+            ex1: docker swarm init
+
+
+
+
+    # SWARM INIT - INICIALIZAR UM CLUSTER COM INTERFACE DE REDE ESPECÌFICA
+     docker swarm init --advertise-addr=<IP>
+            ex1: docker swarm init --advertise-addr=192.168.0.1
+
+
+
+
+
+    # SWARM JOIN-TOKEN - PEGUE O TOKEN
+     docker swarm join-token << COLOQUE AQUI WORKER/MANAGER >>
+            ex1: docker swarm join-token worker
+            ex2: docker swarm join-token manager
+
+
+
+
+    # SWARM LEAVE - (Worker) FINALIZAR UM CLUSTER COM INTERFACE DE REDE ESPECÌFICA
+     docker swarm leave
+            ex1: docker swarm leave
+
+
+
+
+    # SWARM LEAVE - (Manager) FORCE A FINALIZAÇÂO UM CLUSTER COM INTERFACE DE REDE ESPECÌFICA
+     docker swarm leave --force
+            ex1: docker swarm leave --force
+
+
+
+
+    # NODE LS - LISTE OS NODES DO SWARM
+     docker node ls
+            ex1: docker node ls
+
+
+
+
+    # NODE PROMOTE - PROMOVA UM NODE A REACHABLE (ALCANÇÀVEL A LIDER)
+     docker node promote << COLOQUE AQUI O HOSTNAME DO NODE >>
+            ex1: docker node promote boguinha_02
+
+
+
+
+    # NODE DEMOTE - DESPROMOVA UM NODE A REACHABLE (ALCANÇÀVEL A LIDER)
+     docker node demote << COLOQUE AQUI O HOSTNAME DO NODE >>
+            ex1: docker node demote boguinha_02
+
+
+
+
+    # NODE RM - REMOVA UM NODE
+     docker node rm << COLOQUE AQUI O HOSTNAME DO NODE >>
+            ex1: docker node rm boguinha_02
+
+
+
+
+    # NODE RM - FORCE A REMOÇÂO DE UM NODE
+     docker node rm -f << COLOQUE AQUI O HOSTNAME DO NODE >>
+            ex1: docker node rm -f boguinha_02
+
+
+
+
+    # NODE UPDATE - ATUALIZE OS NODES DO CLUSTER
+
+
+        # NODE UPDATE PAUSE - NODE NÃO PODE RECEBER MAIS NENHUM CONTAINER
+         docker node update --availability pause <WORKER_HOSTNAME>
+                ex1: docker node update --availability pause <WORKER_HOSTNAME>
+
+
+
+
+        # NODE UPDATE ACTIVE - NODE VOLTOU A PODER RECEBER CONTAINERES
+         docker node update --availability active <WORKER_HOSTNAME>
+                ex1: docker node update --availability active <WORKER_HOSTNAME>
+
+
+
+
+        # NODE UPDATE DRAIN - NODE NÃO PODE CONTER NENHUM CONTAINER
+         docker node update --availability drain <WORKER_HOSTNAME>
+                ex1: docker node update --availability drain <WORKER_HOSTNAME>
+
+
+
+
+    # SERVICE CREATE - CRIE UM NOVO SERVICE: DEFINA UM NOME AO SERVICE
+     docker service create --name << COLOQUE AQUI O NOME DO SERVICE >> << IMAGE >>
+            ex1: docker service create --name meu_service nginx
+
+
+
+
+        # SERVICE CREATE - CRIE UM NOVO SERVICE: DEFINA O NÚMERO DE RÉPLICAS
+         docker service create --name << COLOQUE AQUI O NOME DO SERVICE >> --replicas << COLOQUE AQUI O NÚMERO DE RÉPLICAS >> << IMAGE >>
+            ex1: docker service create --name meu_service --replicas 3 nginx
+
+
+
+
+        # SERVICE CREATE - CRIE UM NOVO SERVICE: DEFINA O NÚMERO DE RÉPLICAS E PUBLIQUE NUMA PORTA
+         docker service create --name << COLOQUE AQUI O NOME DO SERVICE >> --replicas << COLOQUE AQUI O NÚMERO DE RÉPLICAS >> --publish << HOST_PORT:CONTAINER_PORT >> << IMAGE >>
+            ex1: docker service create --name meu_service --replicas 3 --publish 8080:80 nginx
+
+
+
+
+    # SERVICE LS - LISTE OS SERVICES
+     docker service ls
+            ex1: docker service ls
+
+
+
+
+    # SERVICE PS - LISTE ONDE RODA OS SERVICES
+     docker service ps << SERVICE_NAME >>
+            ex1: docker service ps meu_service
+
+
+
+
+    # SERVICE INSPECT - INSPECIONE OS SERVICES
+     docker service inspect << SERVICE_NAME >>
+            ex1: docker service inspect meu_service
+
+
+
+
+    # SERVICE SCALE - ESCALE A QUATIDADE DOS CONTAINERES
+     docker service scale << SERVICE_NAME >>=<< SERVICE_NUMBER >>
+            ex1: docker service scale meu_service=3
+
+
+
+
+    # SERVICE LOGS - EXIBA OS LOGS DO CLUSTER DE CADA CONTAINER
+     docker service logs << SERVICE_NAME >>
+            ex1: docker service logs meu_service
+
+
+
+
+        # SERVICE LOGS - EXIBA OS LOGS DO CLUSTER DE CADA CONTAINER, PELA PARTE FINAL
+         docker service logs -f << SERVICE_NAME >>
+                ex1: docker service logs -f meu_service
+
+
+
+
+    # SERVICE RM - REMOVA UM SERVICE
+     docker service rm << SERVICE_NAME >>
+            ex1: docker service rm meu_service
+
+
+
+
+# SECRET - INFORMAÇÃO SENSÍVEIS DENTRO DO CLUSTER
+
+
+    # SECRET CREATE - CRIE UMA SECRET
+    docker secret create <SECRET_NAME>
+            ex1: docker secret create meu_arquivo
+            ex2: echo -n "<INFORMAÇÂO>" | docker secret create <SECRET_NAME> -
+
+
+
+
+    # SECRET LS - LISTE UMA SECRET
+    docker secret ls
+            ex1: docker secret ls
+
+
+
+
+    # SECRET INSPECT - INSPECIONE UMA SECRET
+    docker secret inspect <SECRET_NAME>
+            ex1: docker secret inspect meu_arquivo
+
+
+
+
+    # SECRET ADD - ADICIONE UM SECRET AO SERVICE
+    docker service update --secret-add <SECRET_NAME> <SERVICE_NAME>
+            ex1: docker service update --secret-add meu_arquivo nginx
+
+
+
+
+    # SECRET RM - REMOVA UM SECRET AO SERVICE
+    docker service update --secret-rn <SECRET_NAME> <SERVICE_NAME>
+            ex1: docker service update --secret-rm meu_arquivo nginx

@@ -1,0 +1,1 @@
+docker compose && docker nginx spacevim registry gitea d3f0/coreemu_vnc debia ubuntu

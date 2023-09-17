@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# REFERẼNCIAS:
+#    ->	   https://www.dicas-l.com.br/arquivo/tratando_sinais_do_sistema_com_o_comando_trap.php
+#    ->    https://www.youtube.com/watch?v=bsGkIKP1OZ4
+
+function ctrl_c()
+{
+	echo
+	echo "Tchau..."
+
+	# 127: valor do ctrl-c
+	exit 127
+}
+
+
+# trap: comando para tratamento de erros
+trap ctrl_c SIGINT SIGTERM
+
+
+while : ; do
+	echo -en "Agora são: $(date +%H:%M:%S)\r\r"
+done

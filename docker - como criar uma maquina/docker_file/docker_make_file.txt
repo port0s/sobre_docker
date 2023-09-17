@@ -1,0 +1,45 @@
+# CRIE O DOCKERFILE (nome do arquivo que premite criar uma imagem)
+  nano Dockerfile
+
+
+# ESPECIFIQUE O LOCAL DO QUAL SE IRÁ CRIAR A IMAGEM
+  FROM << COLOQUE AQUI O NOME (PODE SER DA DISTRO) DE ONDE A IMAGEM SERÁ CRIADA >>
+    ex1: FROM scratch
+    ex2: FROM ubuntu:19.04
+    ex3: FROM debian:11
+
+
+# COLOQUE O NOME DO MANTENEDOR DESTA IMAGEM
+  MAINTAINER << COLOQUE AQUI O NOME DE QUEM MANTÉM ESTA IMAGEM >>
+    ex: MAINTAINER rui <ruimail101.com.br>
+
+
+# CRIAR UM CONTAINER PARA SHELLSCRIPT
+  ENV PATH << COLOQUE AQUI O QUE QUISER ADICIONAR >>
+    ex: criação do diretório app (dentro do container) e execução da variável PATH do sistema local
+    ENV PATH=/app:$PATH
+
+
+  ## CASO TENHA CRIADO UMA AQUIVO LOCAL E QUEIRA MANDAR PARA A IMAGEM A SER GERADA
+    COPY << COLOQUE AQUI O NOME DO ARQUIVO >>
+    ex: cópia de arquivo local para dentro do diretório que será criado na imagem a ser gerada
+      COPY hora_no_terminal.sh /app/
+
+
+  ## AMBIENTE NO QUAL O ARQUIVO IRÁ RODAR
+    WORKDIR << COLOQUE AQUI O NOME DO DIRETÓRIO >>
+    ex: WORKDIR /app
+
+
+  ## NOME DA APLICAÇÃO QUE DESEJA RODAR DE MANEIRA AUTOMÁTICA
+    ENTRYPOINT ["./hora_no_terminal.sh"]
+
+
+# PARA CRIA UMA IMAGEM
+  docker build << COLOQUE AQUI O(S) NOME(S) DO(S) ARQUIVO(S) A SE USAR >> 
+
+	ex: docker build --tag=aprendizado-docker .
+		
+	OBS1: a tag é opcional; aqui ela é utilizada para a imagem ser encontrada mais facilmente. 
+	OBS2: o ponto no final quer dizer: build tudo que está dentro deste diretótio no qual o comando está sendo executado
+	

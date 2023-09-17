@@ -1,0 +1,6 @@
+-> https://www.youtube.com/playlist?list=PLrKF1HogkLXw_mG0TOZyf6wgRhFFFDfRd
+-> https://www.google.com/search?q=ubuntu+gui+in+docker&oq=ubuntu+gui+in+docker&aqs=chrome..69i57.12671j0j0&sourceid=chrome&ie=UTF-8
+-> https://www.google.com/search?q=ubuntu+gui+in+docker&oq=ubuntu+gui+in+docker&aqs=chrome..69i57.12671j0j0&sourceid=chrome&ie=UTF-8
+-> https://stackoverflow.com/questions/40658095/how-to-open-ubuntu-gui-inside-a-docker-image
+-> https://www.google.com/search?q=docker+gui&oq=docker+gui&aqs=chrome..69i57.2735j0j0&sourceid=chrome&ie=UTF-8
+-> https://www.google.com/search?q=display+in+docker&oq=display+in+docker&aqs=chrome..69i57.6503j0j0&sourceid=chrome&ie=UTF-8
